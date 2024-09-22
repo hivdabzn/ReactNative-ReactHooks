@@ -1,79 +1,99 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# State'in Ortaya Çıkma Noktası
 
-# Getting Started
+React uygulamalarında bileşen içeirinde kullanıcı etkileşimi sonucu arayğzde değişim olmasını isteriz.(ör; bit butona tıklandığında tema değişimi)
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+# State
 
-## Step 1: Start the Metro Server
+state: bileşen içerinde verileri saklamya yarayan ve yönetmeye yarayan yapıdır.
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+state'in değeri her değiştiğinde bileşen otomatik olarak tekrardan render olur.(bu sayede state'e bağlı olarak görünümü değişecek olan arazyüz yapıları güncellemiş olur)
 
-To start Metro, run the following command from the _root_ of your React Native project:
+eğer ki tuttuğumuz değişkenin değerin de bir değişiklik oldupunda arayüz de bir değişim olması gerekiyorsa state tercih ediyoruz.
 
-```bash
-# using npm
-npm start
+useState(x) : useState'i kullanırken x yazılan yere "initial state" denir."başlangıç değeri" : statin bileşen ekranına basıldığı anda sahip olacağı değer.
 
-# OR using Yarn
-yarn start
-```
+usestate ile tutulan bir değeri değiştirmenin tek yolu vardır, usestatin döndürdüğü setter fonksiyonu kullanmak.
 
-## Step 2: Start your Application
+# Component
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+- react'ta iki çeşit component bulunur.
 
-### For Android
+1. Class Components:
 
-```bash
-# using npm
-npm run android
+- Fuction component'lar ortaya çıkmadan önce kullanılıdır.
+- Modern projelerde yerini function'a bıraktıları
+- Hooks kullanımı mevcut değil.
 
-# OR using Yarn
-yarn android
-```
+2. Function Component:
 
-### For iOS
+- Modern projelerde class'lar fazla kod alanı kapladığından class'ın sahip olduğu state , lifecycle vc. özelliklere sahip olmamasına rağmen react hookları sayesinde class'ların bütün özelliklerini fonksiyonlar'da edindiler. Ve daha az ko alanı kapladığı ve daha okunabilir olduğu için günümüzde bir react projesine başlandığı zman her koşulda ilk tercihimiz olucaktır.
 
-```bash
-# using npm
-npm run ios
+# Lifecycle (Yaşam Döngüsü)
 
-# OR using Yarn
-yarn ios
-```
+- React bileşeneride normal bir canlı gibi yaşam döngüsüne sahiptir. Bu döngü 3 aşamadan oluşur.
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+1. Doğma - Mount (Ekrana Basılma) - componentDidMount()
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+2. Gelişme - Update (Güncelleneme) - componentDidUpdate()
 
-## Step 3: Modifying your App
+3. Ölme - UnMount (Ekrandan Gitme) - componentWillUnmount()
 
-Now that you have successfully run the app, let's modify it.
+- Bizim bu yaşam döngüsüne hakim olmamız ve izlyebilmemiz gerekir.
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+- Bileşen ekrana basıldığı ilk anda, bileşen her güncellendiği sırada veya bileşen ekrandan kaldırılırken bu olayları izleyip fonksiyonlar çalıştırmak isteyebilir.
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+## Örnekler
 
-## Congratulations! :tada:
+- Örneğn bileşen ekrana geldiği ilk anda api isteği atıp verileri almak isteyebiliriz.
 
-You've successfully run and modified your React Native App. :partying_face:
+- Bileşenin tutuğu sayfa state her değitğinde yeni sayfanın içerğinği almak isteyebiliriz.
 
-### Now what?
+- Bileşen ekrandan gittiği anda sürekli tekrar eden bir işlemi ve bitmeyen bir sayacı durdurmak isteyebiliri.
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
+- Class componentlarda yaşam döngüsünü izlememiz sağlayan bazı methodlar mevcut.
 
-# Troubleshooting
+## Not
 
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+- Class'ların sahip olduğu ama function'ların sahip olmadığı özellikler için funcların'da bu özellikleri kullanabilmesi için react hook' larını ortaya çıkarıyor
 
-# Learn More
+- Class c.'ların sahip oldğu özellikleri function c.'larda kullanmazı sağlar.
 
-To learn more about React Native, take a look at the following resources:
+- Class c.'larındaki state özelliğini function c.'larında "useState" hookuyla kullanırız.
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+- Class c.'larındaki yaşam döngü özelliklelerini functioon c.'larda "useEffect" hookuyla kullanırız.
+
+# useEffect
+
+- Amacı: class'lardaki componentDidMount | componentDidUpdate | componentWillUnamount yerine function c'larda kullanılır.
+
+- Fonksiyonel bileşenlerde yaşam döngüsünü izlememizi sağlar
+
+# Kullanımlar
+
+1. ComponentDidMount :bileşenin ekrana gelme olayını izlemye yarar.
+
+- - 1.parametre > çalışacak olan callback function
+- - 2.parametre > boş bir bağımlılık dizisi
+- - `useEffect(()=>{},[])`
+
+2. ComponenetWillUnmount : bileşenin ekrandan gitmesi olayını izler
+
+- - 1.parametre > çalışacak olan callback function
+- - 2.parametre > boş bir bağımlılık dizisi
+- - çalşacak olan fonk.return satırına bir fonk.eklenir ve bu fon.bilşene ekrandan gittiğinde çalışır.
+
+- - `useEffect(()=>{return ()=>{}},[])`
+
+3. CommponenetDidUpdate : props veya state her değiştiğinde çalışan yöntem
+
+- - 1.parametre > çalışacak olan callback function
+- - 2.parametre > yok
+
+`useEffect(()=>{})`
+
+4. CommponenetDidUpdate-2 : 'Belirlediğimiz' props veya state her değiştiğinde çalışan yöntem
+
+- - 1.parametre > çalışacak olan callback function
+- - 2.parametre > dolu bir bağımlılık dizisi
+    `useEffect(()=>{},[page])`
+# 7.sezon-ReactNative-ReactHooks
