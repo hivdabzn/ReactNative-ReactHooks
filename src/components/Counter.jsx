@@ -1,13 +1,55 @@
-import {useState} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {useEffect, useState} from 'react';
+import {
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 const Counter = () => {
   const [count, setCount] = useState(0);
+
+  const [inputValue, setInputValue] = useState('');
   //   const deger = useState(8);
   //   console.log(deger);
 
+  //1) Bileşenin ekrana basılma olayını izle
+  //   useEffect(() => {
+  //     console.log('!!!!!!!! BİLEŞEN EKRANA BASILDI!!!');
+  //   }, []);
+
+  //2) Bileşen ekrandan gitme olayını izle
+  //   useEffect(() => {
+  //     return () => console.log('>>>>>>>BİLEŞEN EKRANDAN GİTTİ');
+  //   }, []);
+
+  //3)BİLEŞENİN EKRANA GELME VE GİTME OLAYINI İZLE
+  //   useEffect(() => {
+  //     console.log('!!!!!!!! BİLEŞEN EKRANA BASILDI!!!');
+  //     return () => console.log('>>>>>>>BİLEŞEN EKRANDAN GİTTİ');
+  //   }, []);
+
+  //4)BİLEŞENİN UPDATE OLMA OLAYINI İZLE
+  //   useEffect(() => {
+  //     console.log('!!!!!BİLEŞEN RENDER OLDU STATE VEYA PROPS DEĞİŞTİ.');
+  //   });
+
+  //5) INPUT DEĞİŞİME BAĞIMLI OLAN DEĞERİ İZLE
+  useEffect(() => {
+    console.log('INPUT DEĞERİ DEĞİŞTİ:', inputValue);
+  }, [inputValue]);
+
   return (
     <View style={styles.container}>
+      <TextInput
+        style={styles.input}
+        placeholder="Değer girin"
+        value={inputValue}
+        onChangeText={setInputValue}
+      />
+
       <TouchableOpacity
         onPress={() => setCount(count - 1)}
         disabled={count === 0}
@@ -61,5 +103,14 @@ const styles = StyleSheet.create({
     fontSize: 60,
     fontWeight: 'bold',
     marginVertical: 20,
+  },
+  input: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    marginBottom: 20,
+    width: '80%',
   },
 });
