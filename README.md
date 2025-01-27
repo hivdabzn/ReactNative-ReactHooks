@@ -96,4 +96,4 @@ usestate ile tutulan bir değeri değiştirmenin tek yolu vardır, usestatin dö
 - - 1.parametre > çalışacak olan callback function
 - - 2.parametre > dolu bir bağımlılık dizisi
     `useEffect(()=>{},[page])`
-# 7.sezon-ReactNative-ReactHooks
+
